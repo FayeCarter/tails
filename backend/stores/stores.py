@@ -12,10 +12,13 @@ def search():
   response = ""
 
   if query:
+
+    query = query.lower().replace(" ", "") 
+
     for store in stores_list:
-      if query in store['postcode']:
+      if query in store['postcode'].lower().replace(" ", ""):
         response = store['name']
-      elif query in store['name']:
+      elif query in store['name'].lower():
         response = store['name']
 
     return jsonify(response)

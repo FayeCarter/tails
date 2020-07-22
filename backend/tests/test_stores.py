@@ -13,15 +13,24 @@ def test_name_search_function(app, client):
   When searching for a place name
   The stores search route returns json result
   """
-  response = client.get('/stores/search?query=hav')
+  response = client.get('/stores/search?query=have')
   assert response.status_code == 200
   assert response.json == 'Newhaven'
 
 def test_postcode_search_function(app, client):
   """
-  When searching for a place name
+  When searching for a postcode
   The stores search route returns json result
   """
   response = client.get('/stores/search?query=AL1')
+  assert response.status_code == 200
+  assert response.json == 'St_Albans'
+
+def test_search_format(app, client):
+  """
+  When searching for a postcode without correct formatting
+  The stores search route returns json result
+  """
+  response = client.get('/stores/search?query=l 12')
   assert response.status_code == 200
   assert response.json == 'St_Albans'
