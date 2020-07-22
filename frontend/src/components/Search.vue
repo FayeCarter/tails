@@ -1,6 +1,6 @@
 <template>
   <div class="search">
-    <input type="text" v-model="store" @input="getStores">
+    <input type="text" v-model="store" @input="handleInput">
     <div v-if="stores">
       <ul class="stores"> 
         <li class="suggested_store" v-for="store in stores" v-bind:key="store" >{{ store }}</li>
@@ -29,7 +29,12 @@ export default {
       .catch(error => {
         console.log(error)
       })
-    }
+    },
+    handleInput() {
+      if (this.store.length >= 2) {
+        this.getStores()
+      }
+    },
   }
 };
 </script>

@@ -26,4 +26,26 @@ describe('Search.vue', () => {
 
     expect(wrapper.find('.suggested_store').text()).toEqual("Newhaven")
   })
+
+  it('suggested_stores render only once two characters have been entered', async () => {
+    const wrapper = shallowMount(Search)
+
+    const response = singleStoreMock;
+    axios.get.mockResolvedValue(response);
+
+    const input = wrapper.find('input');
+    input.element.value = 'n';
+    input.trigger('input');
+
+    await flushPromises()
+
+    expect(wrapper.find('.suggested_store').exists()).toBe(false)
+
+    input.element.value = 'ne';
+    input.trigger('input');
+
+    await flushPromises()
+
+    expect(wrapper.find('.suggested_store').exists()).toBe(true)
+  })
 })
