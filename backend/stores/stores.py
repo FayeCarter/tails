@@ -9,7 +9,7 @@ stores_bp = Blueprint('stores', __name__)
 @stores_bp.route('/search', methods=["GET"])
 def search():
   query = request.args.get('query')
-  response = ""
+  response = []
 
   if query:
 
@@ -17,9 +17,9 @@ def search():
 
     for store in stores_list:
       if query in store['postcode'].lower().replace(" ", ""):
-        response = store['name']
+        response.append(store['name'])
       elif query in store['name'].lower():
-        response = store['name']
+        response.append(store['name'])
 
     return jsonify(response)
 

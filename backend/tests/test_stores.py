@@ -15,7 +15,7 @@ def test_name_search_function(app, client):
   """
   response = client.get('/stores/search?query=have')
   assert response.status_code == 200
-  assert response.json == 'Newhaven'
+  assert response.json == ['Newhaven']
 
 def test_postcode_search_function(app, client):
   """
@@ -24,7 +24,7 @@ def test_postcode_search_function(app, client):
   """
   response = client.get('/stores/search?query=AL1')
   assert response.status_code == 200
-  assert response.json == 'St_Albans'
+  assert response.json == ['St_Albans']
 
 def test_search_format(app, client):
   """
@@ -33,4 +33,22 @@ def test_search_format(app, client):
   """
   response = client.get('/stores/search?query=l 12')
   assert response.status_code == 200
-  assert response.json == 'St_Albans'
+  assert response.json == ['St_Albans']
+
+def test_name_and_postcode(app, client):
+  """
+  When searching for a postcode without correct formatting
+  The stores search route returns json result
+  """
+  response = client.get('/stores/search?query=br')
+
+  expected_response = [
+    'Orpington', 
+    'Broadstairs', 
+    'Bracknell',
+    'Tunbridge_Wells', 
+    'Brentford'
+  ]
+
+  assert response.status_code == 200
+  assert response.json == expected_response
