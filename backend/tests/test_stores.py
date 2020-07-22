@@ -8,7 +8,7 @@ def test_search_route(app, client):
   assert response.status_code == 200
   assert response.data == b'Invalid search'
 
-def test_search_function(app, client):
+def test_name_search_function(app, client):
   """
   When searching for a place name
   The stores search route returns json result
@@ -16,3 +16,12 @@ def test_search_function(app, client):
   response = client.get('/stores/search?query=hav')
   assert response.status_code == 200
   assert response.json == 'Newhaven'
+
+def test_postcode_search_function(app, client):
+  """
+  When searching for a place name
+  The stores search route returns json result
+  """
+  response = client.get('/stores/search?query=AL1')
+  assert response.status_code == 200
+  assert response.json == 'St_Albans'

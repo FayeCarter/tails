@@ -13,7 +13,9 @@ def search():
 
   if query:
     for store in stores_list:
-      if query in store['name']:
+      if query in store['postcode']:
+        response = store['name']
+      elif query in store['name']:
         response = store['name']
 
     return jsonify(response)
