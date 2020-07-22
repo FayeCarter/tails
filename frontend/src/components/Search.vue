@@ -1,9 +1,9 @@
 <template>
   <div class="search">
-    <input type="text" v-model="store" @input="handleInput">
+    <input type="text" v-model="store" @input="handleInput" v-on:keyup.enter="sendStores">
     <div v-if="stores">
       <ul class="stores"> 
-        <li class="suggested_store" v-for="store in stores" v-bind:key="store" >{{ store }}</li>
+        <li class="suggested-store" v-for="store in stores" v-bind:key="store" >{{ store }}</li>
       </ul>
     </div>
   </div>
@@ -35,6 +35,10 @@ export default {
         this.getStores()
       }
     },
+    sendStores() {
+      console.log("HERE")
+      this.$emit('storesFound', this.stores)
+    }
   }
 };
 </script>
