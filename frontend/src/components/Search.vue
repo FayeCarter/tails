@@ -36,7 +36,6 @@ export default {
       }
     },
     sendStores() {
-      console.log("HERE")
       this.$emit('storesFound', this.stores)
     }
   }

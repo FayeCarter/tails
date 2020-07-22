@@ -63,7 +63,7 @@ describe('Search.vue', () => {
       input.trigger('keyup.enter');
   
       await flushPromises()
-      console.log(wrapper.emitted())
+
       expect(wrapper.emitted().storesFound).toBeTruthy()
     })
   })
