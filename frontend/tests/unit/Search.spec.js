@@ -30,7 +30,7 @@ describe('Search.vue', () => {
       jest.runAllTimers();
       await flushPromises()
 
-      expect(wrapper.find('.suggested-store').text()).toEqual("Newhaven")
+      expect(wrapper.find('.focus').text()).toEqual("Newhaven")
     })
 
     it('removes suggested stores when search bar is empty ', async () => {
@@ -48,7 +48,7 @@ describe('Search.vue', () => {
       jest.runAllTimers();
       await flushPromises()
 
-      expect(wrapper.find('.suggested-store').text()).toEqual("Newhaven")
+      expect(wrapper.find('.focus').text()).toEqual("Newhaven")
 
       input.element.value = 'n';
       input.trigger('input');
@@ -58,10 +58,10 @@ describe('Search.vue', () => {
       jest.runAllTimers();
       await flushPromises()
   
-      expect(wrapper.find('.suggested-store').exists()).toBe(false)
+      expect(wrapper.find('.focus').exists()).toBe(false)
     })
   
-    it('suggested-stores render only once two characters have been entered', async () => {
+    it('focuss render only once two characters have been entered', async () => {
       const wrapper = shallowMount(Search)
   
       const response = singleStoreMock;
@@ -76,7 +76,7 @@ describe('Search.vue', () => {
       jest.runAllTimers();
       await flushPromises()
   
-      expect(wrapper.find('.suggested-store').exists()).toBe(false)
+      expect(wrapper.find('.focus').exists()).toBe(false)
   
       input.element.value = 'ne';
       input.trigger('input');
@@ -84,7 +84,7 @@ describe('Search.vue', () => {
       jest.runAllTimers();
       await flushPromises()
   
-      expect(wrapper.find('.suggested-store').exists()).toBe(true)
+      expect(wrapper.find('.focus').exists()).toBe(true)
     })
 
     it('when rendered suggested store clicked, store added to search bar', async () => {
@@ -102,7 +102,7 @@ describe('Search.vue', () => {
       jest.runAllTimers();
       await flushPromises()
 
-      const suggested = wrapper.find('.suggested-store')
+      const suggested = wrapper.find('.focus')
 
       suggested.trigger('click');
 
@@ -145,7 +145,31 @@ describe('Search.vue', () => {
       jest.runAllTimers();
       await flushPromises()
 
-      expect(wrapper.find('.suggested-store').exists()).toBe(false)
+      expect(wrapper.find('.focus').exists()).toBe(false)
+    })
+  })
+
+  describe('keyboard control', () => {
+    it('pressing the down arrow selects first focus', async () => {
+      const wrapper = shallowMount(Search)
+  
+      const response = singleStoreMock;
+      axios.get.mockResolvedValue(response);
+
+      const input = wrapper.find('input');
+      input.element.value = 'new';
+      input.trigger('input');
+
+      wrapper.setData({ open: 'true' })  
+      jest.runAllTimers();
+      await flushPromises()
+
+      input.trigger('keydown.down')
+      input.trigger('keyup.enter');
+
+      await flushPromises()
+
+      expect(input.element.value).toEqual("Newhaven")
     })
   })
 

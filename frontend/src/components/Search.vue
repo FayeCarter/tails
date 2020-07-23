@@ -1,66 +1,77 @@
 <template>
-  <div>
-    <div class="window" @click="open=false"></div>
-    <input 
-      class="search" 
-      type="text" 
-      v-model="store" 
-      @input="handleInput" 
-      v-on:keyup.enter="selectAllResults" 
-      @focus="open=true"
+<div>
+    <div class="window" @click="open = false"></div>
+    <input
+      class="search"
+      type="text"
+      v-model="store"
+      @input="handleInput"
+      @keyup.enter="setStore(stores[currentItem])"
+      @keyup.down="down"
+      @focus="open = true"
       autocomplete="off"
       placeholder="Search for store by name or postcode"
-    >
+    />
     <div v-if="open && stores.length >= 1 && store.length >= 2">
-      <ul class="stores"> 
+      <ul class="stores">
         <div class="suggestions">Top store suggestions</div>
-        <li class="suggested-store" v-for="store in stores" v-bind:key="store"  @click="setStore(store)" >{{ store }}</li>
+        <li
+          v-for="(store, index) in stores"
+          :class='{"focus": index == currentItem}'
+          v-bind:key="store"
+          @click="setStore(store)">
+            {{ store }}
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
-import axios from 'axios'
+import axios from "axios";
 
 export default {
   name: "Search",
   data() {
     return {
       stores: [],
-      store: null,
+      store: "",
       open: false,
-    }
+      currentItem: 0
+    };
   },
   methods: {
     getStores() {
-      const path = `http://localhost:5000/stores/search?query=${this.store}`
-      clearTimeout(this.debounce)
+      const path = `http://localhost:5000/stores/search?query=${this.store}`;
+      clearTimeout(this.debounce);
       this.debounce = setTimeout(() => {
-        axios.get(path)
-        .then(response => {
-          this.stores = response.data;
-        })
-        .catch(error => {
-          console.log(error)
-        })
-      }, 1000)
+        axios
+          .get(path)
+          .then(response => {
+            this.stores = response.data;
+          })
+          .catch(error => {
+            console.log(error);
+          });
+      }, 1000);
     },
     handleInput() {
       if (this.store.length >= 2) {
-        this.getStores()
-        this.open=true
-      }
-    },
-    selectAllResults() {
-      this.$emit('storesFound', this.stores)
-      this.open = false;
-      this.store=null;
+        this.getStores();
+        this.open = true;
+      } 
+      this.currentItem = 0
     },
     setStore(store) {
       this.store = store;
-      this.$emit('storesFound', [this.store]);
+      this.$emit("storesFound", [this.store]);
       this.open = false;
+    },
+    down() {
+      if (!this.store.length) return;
+      if (this.currentItem < this.stores.length - 1) {
+        this.currentItem ++;
+      }
     }
   },
   watch: {
@@ -84,11 +95,11 @@ export default {
   color: rgb(153, 153, 153);
   font-size: 14px;
   outline: none;
-  margin-top: 40px;
+  margin-top: 20px;
 }
 
 .suggestions {
-  color: rgb(176, 176, 176);  
+  color: rgb(176, 176, 176);
   font-size: 14px;
   padding: 8px;
   border-bottom: 1px solid rgb(203, 203, 203);
@@ -104,7 +115,6 @@ export default {
   list-style-type: none;
   padding: 0;
   margin: 20px auto;
-  box-shadow: 0 0 10px rgb(240, 240, 240);
 }
 
 .suggested-store {
@@ -112,6 +122,10 @@ export default {
 }
 
 .suggested-store:hover {
+  background-color: rgb(230, 229, 229);
+}
+
+.focus {
   background-color: rgb(230, 229, 229);
 }
 
