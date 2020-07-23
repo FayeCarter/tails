@@ -149,7 +149,7 @@ describe('Search.vue', () => {
   });
 
   describe('keyboard control', () => {
-    xit('pressing the down arrow selects first focus', async () => {
+    it('pressing the down arrow selects first focus', async () => {
       const wrapper = shallowMount(Search)
   
       const response = multipleStoresMock;
@@ -171,7 +171,7 @@ describe('Search.vue', () => {
       expect(input.element.value).toEqual("Broadstairs")
     });
 
-    xit('pressing the up arrow selects a focus', async () => {
+    it('pressing the up arrow selects a focus', async () => {
       const wrapper = shallowMount(Search)
   
       const response = multipleStoresMock;
@@ -185,17 +185,14 @@ describe('Search.vue', () => {
       jest.runAllTimers();
       await flushPromises()
 
-      wrapper.trigger('keydown', {
-        key: 'down'
-      })
-      wrapper.trigger('keyup.down')
-      wrapper.trigger('keyup.down')
-      wrapper.trigger('keyup.up')
+      input.trigger('keydown.down')
+      input.trigger('keydown.down')
+      input.trigger('keydown.up')
       input.trigger('keyup.enter');
 
       await flushPromises()
 
-      expect(input.element.value).toEqual("Bracknell")
+      expect(input.element.value).toEqual("Broadstairs")
     });
   });
 
