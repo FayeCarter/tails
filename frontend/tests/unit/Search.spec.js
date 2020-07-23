@@ -28,6 +28,32 @@ describe('Search.vue', () => {
       await flushPromises()
       expect(wrapper.find('.suggested-store').text()).toEqual("Newhaven")
     })
+
+    it('removes suggested stores when search bar is empty ', async () => {
+      const wrapper = shallowMount(Search)
+  
+      const response = singleStoreMock;
+      axios.get.mockResolvedValue(response);
+  
+      const input = wrapper.find('input');
+      input.element.value = 'newhaven';
+      input.trigger('input');
+  
+      wrapper.setData({ open: 'true' })  
+
+      await flushPromises()
+
+      expect(wrapper.find('.suggested-store').text()).toEqual("Newhaven")
+
+      input.element.value = 'n';
+      input.trigger('input');
+      
+      wrapper.setData({ open: 'true' })  
+
+      await flushPromises()
+  
+      expect(wrapper.find('.suggested-store').exists()).toBe(false)
+    })
   
     it('suggested-stores render only once two characters have been entered', async () => {
       const wrapper = shallowMount(Search)

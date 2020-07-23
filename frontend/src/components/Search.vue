@@ -1,7 +1,7 @@
 <template>
   <div>
     <input class="search" type="text" v-model="store" @input="handleInput" v-on:keyup.enter="sendStores" @focus="open=true">
-    <div v-if="open && stores.length >= 1">
+    <div v-if="open && stores.length >= 1 && store.length >= 2">
       <ul class="stores"> 
         <div class="suggestions">Top store suggestions</div>
         <li class="suggested-store" v-for="store in stores" v-bind:key="store"  @click="setStore(store)" >{{ store }}</li>
