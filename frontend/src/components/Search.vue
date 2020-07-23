@@ -6,7 +6,7 @@
       type="text" 
       v-model="store" 
       @input="handleInput" 
-      v-on:keyup.enter="sendStores" 
+      v-on:keyup.enter="selectAllResults" 
       @focus="open=true"
       autocomplete="off"
       placeholder="Search for store by name or postcode"
@@ -52,7 +52,7 @@ export default {
         this.open=true
       }
     },
-    sendStores() {
+    selectAllResults() {
       this.$emit('storesFound', this.stores)
       this.open = false;
       this.store=null;
