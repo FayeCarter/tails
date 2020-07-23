@@ -1,6 +1,15 @@
 <template>
   <div>
-    <input class="search" type="text" v-model="store" @input="handleInput" v-on:keyup.enter="sendStores" @focus="open=true">
+    <input 
+      class="search" 
+      type="text" 
+      v-model="store" 
+      @input="handleInput" 
+      v-on:keyup.enter="sendStores" 
+      @focus="open=true"
+      autocomplete="off"
+      placeholder="Search for store by name or postcode"
+    >
     <div v-if="open && stores.length >= 1 && store.length >= 2">
       <ul class="stores"> 
         <div class="suggestions">Top store suggestions</div>
@@ -36,14 +45,21 @@ export default {
     handleInput() {
       if (this.store.length >= 2) {
         this.getStores()
+        this.open=true
       }
     },
     sendStores() {
       this.$emit('storesFound', this.stores)
       this.open = false;
+      this.store="";
     },
     setStore(store) {
       this.store = store;
+    }
+  },
+  watch: {
+    store() {
+      this.getStores();
     }
   }
 };
