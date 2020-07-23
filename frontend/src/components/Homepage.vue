@@ -11,14 +11,13 @@
 <script>
 import Search from "./Search.vue";
 import Store from "./Store.vue";
-
 export default {
   name: "Homepage",
   components: {
     Search,
     Store
   },
-    data() {
+  data() {
     return {
       stores: []
     }
