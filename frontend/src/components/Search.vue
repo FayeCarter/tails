@@ -1,8 +1,9 @@
 <template>
   <div>
     <input class="search" type="text" v-model="store" @input="handleInput" v-on:keyup.enter="sendStores">
-    <div v-if="stores">
+    <div v-if="stores.length >= 1">
       <ul class="stores"> 
+        <div class="suggestions">Top store suggestions</div>
         <li class="suggested-store" v-for="store in stores" v-bind:key="store" >{{ store }}</li>
       </ul>
     </div>
@@ -58,13 +59,20 @@ export default {
   margin-top: 20px;
 }
 
+.suggestions {
+  color: rgb(176, 176, 176);  
+  font-size: 14px;
+  padding: 8px;
+  border-bottom: 1px solid rgb(203, 203, 203);
+  text-align: left;
+}
+
 .stores {
   width: 450px;
   color: rgb(153, 153, 153);
   border: 1px solid rgb(203, 203, 203);
   border-radius: 5px;
   font-size: 12px;
-  color: rgb(153, 153, 153);
   list-style-type: none;
   padding: 0;
   margin: 20px auto;
