@@ -59,7 +59,6 @@ export default {
     },
     setStore(store) {
       this.store = store;
-      this.sendStores()
     }
   },
   watch: {
