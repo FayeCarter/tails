@@ -5,7 +5,7 @@
   "scripts": {
     "install-dependencies": "cd frontend && yarn",
     "start-frontend": "cd frontend && yarn serve",
-    "setup-api": "cd backend && pipenv shell && flask run",
+    "setup-api": "cd backend && pipenv shell",
     "test-frontend": "cd frontend && yarn jest"
   },
   "repository": {

@@ -12,7 +12,7 @@
 
 ## System Requirements
 
-To run this project you will need to have Python 3, pipenv and npm installed
+To run this project you will need to have Python 3, (pipenv)[https://pypi.org/project/pipenv/] and yarn installed
 
 ## How to run this code
 
@@ -25,6 +25,12 @@ Open a new terminal
 Create a virtual environment
 ```
   yarn setup-api
+```
+
+Install dependencies
+
+```
+  pipenv install
 ```
 
 Run the flask server
