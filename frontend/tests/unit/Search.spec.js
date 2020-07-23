@@ -49,6 +49,27 @@ describe('Search.vue', () => {
   
       expect(wrapper.find('.suggested-store').exists()).toBe(true)
     })
+
+    it('when rendered suggested store clicked, store added to search bar', async () => {
+      const wrapper = shallowMount(Search)
+  
+      const response = singleStoreMock;
+      axios.get.mockResolvedValue(response);
+  
+      const input = wrapper.find('input');
+      input.element.value = 'new';
+      input.trigger('input');
+
+      await flushPromises()
+
+      const suggested = wrapper.find('.suggested-store')
+
+      suggested.trigger('click');
+
+      await flushPromises()
+
+      expect(input.element.value).toEqual("Newhaven")
+    })
   })
 
   describe('Store results', () => {

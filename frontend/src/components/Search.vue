@@ -4,7 +4,7 @@
     <div v-if="stores.length >= 1">
       <ul class="stores"> 
         <div class="suggestions">Top store suggestions</div>
-        <li class="suggested-store" v-for="store in stores" v-bind:key="store" >{{ store }}</li>
+        <li class="suggested-store" v-for="store in stores" v-bind:key="store"  @click="setStore(store)" >{{ store }}</li>
       </ul>
     </div>
   </div>
@@ -17,7 +17,8 @@ export default {
   name: "Search",
   data() {
     return {
-      stores: []
+      stores: [],
+      store: ''
     }
   },
   methods: {
@@ -38,6 +39,9 @@ export default {
     },
     sendStores() {
       this.$emit('storesFound', this.stores)
+    },
+    setStore(store) {
+      this.store = store;
     }
   }
 };
