@@ -1,5 +1,5 @@
 <template>
-  <div class="homepage">
+  <div class="homepage" >
     <h1>Tails Store Locator</h1>
     <Search @storesFound="onStoresFound" />
     <div v-if="stores" class="stores-container">
@@ -26,11 +26,12 @@ export default {
   methods: {
     onStoresFound(value) {
       this.stores = value
+      this.filteredStores = []
       for (let i = 0; i < 3 && this.filteredStores.length < this.stores.length; i ++) {
         this.filteredStores.push(this.stores[i])
       }
-    },
-  }
+    }
+  },
 };
 </script>
 

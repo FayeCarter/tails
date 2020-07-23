@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Store finder for tails.com",
   "scripts": {
+    "install-dependencies": "cd frontend && yarn",
     "start-frontend": "cd frontend && yarn serve",
     "setup-api": "cd backend && pipenv shell && flask run",
     "test-frontend": "cd frontend && yarn jest"
