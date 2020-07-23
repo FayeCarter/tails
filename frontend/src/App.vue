@@ -11,6 +11,20 @@ export default {
   name: 'App',
   components: {
     Homepage
+  },
+  methods: {
+    scroll () {
+      window.onscroll = () => {
+        let bottomOfWindow = document.documentElement.scrollTop + window.innerHeight === document.documentElement.offsetHeight;
+
+        if (bottomOfWindow) {
+          console.log("SCROLL")
+        }
+      };
+    },
+  },
+  mounted() {
+    this.scroll();
   }
 }
 </script>

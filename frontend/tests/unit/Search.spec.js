@@ -152,11 +152,11 @@ describe('Search.vue', () => {
     xit('pressing the down arrow selects first focus', async () => {
       const wrapper = shallowMount(Search)
   
-      const response = singleStoreMock;
+      const response = multipleStoresMock;
       axios.get.mockResolvedValue(response);
 
       const input = wrapper.find('input');
-      input.element.value = 'new';
+      input.element.value = 'br';
       input.trigger('input');
 
       wrapper.setData({ open: 'true' })  
@@ -168,7 +168,7 @@ describe('Search.vue', () => {
 
       await flushPromises()
 
-      expect(input.element.value).toEqual("Newhaven")
+      expect(input.element.value).toEqual("Broadstairs")
     });
 
     xit('pressing the up arrow selects a focus', async () => {
