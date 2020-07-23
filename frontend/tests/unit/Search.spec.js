@@ -121,7 +121,7 @@ describe('Search.vue', () => {
   
       const input = wrapper.find('input');
       input.element.value = 'newhaven';
-      input.trigger('keyup.enter');
+      input.trigger('keydown.enter');
   
       jest.runAllTimers();
       await flushPromises()
@@ -164,7 +164,7 @@ describe('Search.vue', () => {
       await flushPromises()
 
       input.trigger('keydown.down')
-      input.trigger('keyup.enter');
+      input.trigger('keydown.enter');
 
       await flushPromises()
 
@@ -188,7 +188,7 @@ describe('Search.vue', () => {
       input.trigger('keydown.down')
       input.trigger('keydown.down')
       input.trigger('keydown.up')
-      input.trigger('keyup.enter');
+      input.trigger('keydown.enter');
 
       await flushPromises()
 

@@ -6,7 +6,7 @@
       type="text"
       v-model="store"
       @input="handleInput"
-      @keyup.enter="setStore(stores[currentItem])"
+      @keydown.enter="setStore(stores[currentItem])"
       @keydown.down="down"
       @keydown.up="up"
       @focus="open = true"
