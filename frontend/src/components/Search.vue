@@ -1,5 +1,6 @@
 <template>
   <div>
+    <div class="window" @click="open=false"></div>
     <input 
       class="search" 
       type="text" 
@@ -34,13 +35,16 @@ export default {
   methods: {
     getStores() {
       const path = `http://localhost:5000/stores/search?query=${this.store}`
-      axios.get(path)
-      .then(response => {
-        this.stores = response.data;
-      })
-      .catch(error => {
-        console.log(error)
-      })
+      clearTimeout(this.debounce)
+      this.debounce = setTimeout(() => {
+        axios.get(path)
+        .then(response => {
+          this.stores = response.data;
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }, 1000)
     },
     handleInput() {
       if (this.store.length >= 2) {
@@ -55,6 +59,7 @@ export default {
     },
     setStore(store) {
       this.store = store;
+      this.sendStores()
     }
   },
   watch: {
@@ -106,5 +111,13 @@ export default {
 
 .suggested-store:hover {
   background-color: rgb(230, 229, 229);
+}
+
+.window {
+    position:absolute;
+    width:100%;
+    height:100%;
+    top:0;
+    z-index:-1;
 }
 </style>

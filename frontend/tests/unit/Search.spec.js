@@ -5,6 +5,7 @@ import Search from '@/components/Search.vue'
 import { singleStoreMock } from '../../fixtures/StoresMock';
 
 jest.mock('axios');
+jest.useFakeTimers();
 
 describe('Search.vue', () => {
   it('renders with text input', () => {
@@ -13,6 +14,7 @@ describe('Search.vue', () => {
   })
 
   describe('Store suggestions', () => {
+
     it('renders store suggestion when text is entered', async () => {
       const wrapper = shallowMount(Search)
   
@@ -25,7 +27,9 @@ describe('Search.vue', () => {
   
       wrapper.setData({ open: 'true' })  
 
+      jest.runAllTimers();
       await flushPromises()
+
       expect(wrapper.find('.suggested-store').text()).toEqual("Newhaven")
     })
 
@@ -41,6 +45,7 @@ describe('Search.vue', () => {
   
       wrapper.setData({ open: 'true' })  
 
+      jest.runAllTimers();
       await flushPromises()
 
       expect(wrapper.find('.suggested-store').text()).toEqual("Newhaven")
@@ -50,6 +55,7 @@ describe('Search.vue', () => {
       
       wrapper.setData({ open: 'true' })  
 
+      jest.runAllTimers();
       await flushPromises()
   
       expect(wrapper.find('.suggested-store').exists()).toBe(false)
@@ -67,6 +73,7 @@ describe('Search.vue', () => {
       
       wrapper.setData({ open: 'true' })  
 
+      jest.runAllTimers();
       await flushPromises()
   
       expect(wrapper.find('.suggested-store').exists()).toBe(false)
@@ -74,6 +81,7 @@ describe('Search.vue', () => {
       input.element.value = 'ne';
       input.trigger('input');
   
+      jest.runAllTimers();
       await flushPromises()
   
       expect(wrapper.find('.suggested-store').exists()).toBe(true)
@@ -91,6 +99,7 @@ describe('Search.vue', () => {
 
       wrapper.setData({ open: 'true' })  
 
+      jest.runAllTimers();
       await flushPromises()
 
       const suggested = wrapper.find('.suggested-store')
@@ -115,6 +124,7 @@ describe('Search.vue', () => {
       input.element.value = 'newhaven';
       input.trigger('keyup.enter');
   
+      jest.runAllTimers();
       await flushPromises()
 
       expect(wrapper.emitted().storesFound).toBeTruthy()
@@ -132,6 +142,7 @@ describe('Search.vue', () => {
       
       wrapper.setData({ open: 'false' })  
 
+      jest.runAllTimers();
       await flushPromises()
 
       expect(wrapper.find('.suggested-store').exists()).toBe(false)
