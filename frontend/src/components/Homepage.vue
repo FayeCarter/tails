@@ -2,7 +2,7 @@
   <div class="homepage">
     <h1>Tails Store Locator</h1>
     <Search @storesFound="onStoresFound" />
-    <div v-if="stores">
+    <div v-if="stores" class="stores-container">
       <Store v-for="store in filteredStores" v-bind:key="store" :name="store" />
     </div>
   </div>
@@ -34,4 +34,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.stores-container {
+  margin-top: 80px;
+}
+</style>

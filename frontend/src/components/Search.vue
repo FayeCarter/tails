@@ -84,7 +84,7 @@ export default {
   color: rgb(153, 153, 153);
   font-size: 14px;
   outline: none;
-  margin-top: 20px;
+  margin-top: 40px;
 }
 
 .suggestions {
@@ -104,6 +104,7 @@ export default {
   list-style-type: none;
   padding: 0;
   margin: 20px auto;
+  box-shadow: 0 0 10px rgb(240, 240, 240);
 }
 
 .suggested-store {

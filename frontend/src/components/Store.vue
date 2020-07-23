@@ -13,4 +13,16 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.store {
+  background-color: rgb(240, 247, 251);
+  width: 70%;
+  margin: 30px auto;
+  padding: 15px;
+}
+
+.store:hover {
+  background-color: rgb(226, 232, 236);
+}
+
+</style>

@@ -20,6 +20,6 @@ export default {
   font-family: Avenir Next, Arial, sans-serif;
   text-align: center;
   color:rgb(3, 14, 45);
-  margin-top: 90px;
+  margin-top: 250px;
 }
 </style>
