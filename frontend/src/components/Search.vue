@@ -8,6 +8,7 @@
       @input="handleInput"
       @keyup.enter="setStore(stores[currentItem])"
       @keyup.down="down"
+      @keyup.up="up"
       @focus="open = true"
       autocomplete="off"
       placeholder="Search for store by name or postcode"
@@ -71,6 +72,12 @@ export default {
       if (!this.store.length) return;
       if (this.currentItem < this.stores.length - 1) {
         this.currentItem ++;
+      }
+    },
+    up() {
+      if (!this.store.length) return;
+      if (this.currentItem > 0) {
+        this.currentItem --;
       }
     }
   },
