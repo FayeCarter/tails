@@ -23,8 +23,9 @@ describe('Search.vue', () => {
       input.element.value = 'newhaven';
       input.trigger('input');
   
+      wrapper.setData({ open: 'true' })  
+
       await flushPromises()
-  
       expect(wrapper.find('.suggested-store').text()).toEqual("Newhaven")
     })
   
@@ -37,7 +38,9 @@ describe('Search.vue', () => {
       const input = wrapper.find('input');
       input.element.value = 'n';
       input.trigger('input');
-  
+      
+      wrapper.setData({ open: 'true' })  
+
       await flushPromises()
   
       expect(wrapper.find('.suggested-store').exists()).toBe(false)
@@ -60,6 +63,8 @@ describe('Search.vue', () => {
       input.element.value = 'new';
       input.trigger('input');
 
+      wrapper.setData({ open: 'true' })  
+
       await flushPromises()
 
       const suggested = wrapper.find('.suggested-store')
@@ -70,6 +75,7 @@ describe('Search.vue', () => {
 
       expect(input.element.value).toEqual("Newhaven")
     })
+
   })
 
   describe('Store results', () => {
@@ -86,6 +92,23 @@ describe('Search.vue', () => {
       await flushPromises()
 
       expect(wrapper.emitted().storesFound).toBeTruthy()
+    })
+
+    it('on submit, suggested stores are no longer visible', async () => {
+      const wrapper = mount(Search)
+  
+      const response = singleStoreMock;
+      axios.get.mockResolvedValue(response);
+  
+      const input = wrapper.find('input');
+      input.element.value = 'newhaven';
+      input.trigger('keyup.enter');
+      
+      wrapper.setData({ open: 'false' })  
+
+      await flushPromises()
+
+      expect(wrapper.find('.suggested-store').exists()).toBe(false)
     })
   })
 

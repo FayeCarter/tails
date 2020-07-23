@@ -1,7 +1,7 @@
 <template>
   <div>
-    <input class="search" type="text" v-model="store" @input="handleInput" v-on:keyup.enter="sendStores">
-    <div v-if="stores.length >= 1">
+    <input class="search" type="text" v-model="store" @input="handleInput" v-on:keyup.enter="sendStores" @focus="open=true">
+    <div v-if="open && stores.length >= 1">
       <ul class="stores"> 
         <div class="suggestions">Top store suggestions</div>
         <li class="suggested-store" v-for="store in stores" v-bind:key="store"  @click="setStore(store)" >{{ store }}</li>
@@ -18,7 +18,8 @@ export default {
   data() {
     return {
       stores: [],
-      store: ''
+      store: '',
+      open: false,
     }
   },
   methods: {
@@ -39,6 +40,7 @@ export default {
     },
     sendStores() {
       this.$emit('storesFound', this.stores)
+      this.open = false;
     },
     setStore(store) {
       this.store = store;
