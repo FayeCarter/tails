@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       stores: [],
-      store: '',
+      store: null,
       open: false,
     }
   },
@@ -55,10 +55,12 @@ export default {
     sendStores() {
       this.$emit('storesFound', this.stores)
       this.open = false;
-      this.store="";
+      this.store=null;
     },
     setStore(store) {
       this.store = store;
+      this.$emit('storesFound', [this.store]);
+      this.open = false;
     }
   },
   watch: {
