@@ -24,7 +24,7 @@ def test_postcode_search_function(app, client):
   """
   response = client.get('/stores/search?query=AL1')
   assert response.status_code == 200
-  assert response.json == ['St_Albans']
+  assert response.json == ['St Albans']
 
 def test_search_format(app, client):
   """
@@ -33,7 +33,7 @@ def test_search_format(app, client):
   """
   response = client.get('/stores/search?query=l 12')
   assert response.status_code == 200
-  assert response.json == ['St_Albans']
+  assert response.json == ['St Albans']
 
 def test_name_and_postcode(app, client):
   """
@@ -46,7 +46,7 @@ def test_name_and_postcode(app, client):
     'Orpington', 
     'Broadstairs', 
     'Bracknell',
-    'Tunbridge_Wells', 
+    'Tunbridge Wells', 
     'Brentford'
   ]
 

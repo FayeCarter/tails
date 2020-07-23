@@ -17,9 +17,9 @@ def search():
 
     for store in stores_list:
       if query in store['postcode'].lower().replace(" ", ""):
-        response.append(store['name'])
+        response.append(store['name'].replace("_", " "))
       elif query in store['name'].lower():
-        response.append(store['name'])
+        response.append(store['name'].replace("_", " "))
 
     return jsonify(response)
 
