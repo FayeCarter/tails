@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 import json
-with open('../stores.json', 'r') as stores_file:
+with open('./stores.json', 'r') as stores_file:
   data = stores_file.read()
 stores_list = json.loads(data)
 
