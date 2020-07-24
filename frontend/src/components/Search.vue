@@ -6,7 +6,7 @@
       type="text"
       v-model="store"
       @input="handleInput"
-      @keydown.enter="handleSubmit"
+      @keydown.enter="setStore(stores[currentItem])"
       @keydown.down="down"
       @keydown.up="up"
       @focus="open = true"
@@ -38,7 +38,7 @@ export default {
       stores: [],
       store: "",
       open: false,
-      currentItem: -1
+      currentItem: 0
     };
   },
   methods: {
@@ -61,12 +61,7 @@ export default {
         this.getStores();
         this.open = true;
       } 
-      this.currentItem = -1
-    },
-    selectAllResults() {
-      this.$emit('storesFound', this.stores)
-      this.open = false;
-      this.store=null;
+      this.currentItem = 0
     },
     setStore(store) {
       this.store = store;
@@ -83,13 +78,6 @@ export default {
       if (!this.store.length) return;
       if (this.currentItem > 0) {
         this.currentItem --;
-      }
-    },
-    handleSubmit() {
-      if (this.currentItem === -1) {
-        this.selectAllResults()
-      } else {
-        this.setStore(this.stores[this.currentItem])
       }
     }
   },
