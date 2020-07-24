@@ -3,7 +3,7 @@
     <h1>Tails Store Locator</h1>
     <Search @storesFound="onStoresFound" />
     <div v-if="stores" class="stores-container">
-      <Store v-for="store in filteredStores" v-bind:key="store" :name="store" />
+      <Store v-for="store in stores" v-bind:key="store" :name="store" />
     </div>
   </div>
 </template>
@@ -19,17 +19,12 @@ export default {
   },
   data() {
     return {
-      stores: [],
-      filteredStores: [],
+      stores: []
     }
   },
   methods: {
     onStoresFound(value) {
       this.stores = value
-      this.filteredStores = []
-      for (let i = 0; i < 3 && this.filteredStores.length < this.stores.length; i ++) {
-        this.filteredStores.push(this.stores[i])
-      }
     }
   },
 };
