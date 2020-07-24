@@ -21,14 +21,14 @@ You will need to have docker setup to run this code
 Clone the repository and go into the directory where the package has been placed
 
 ### Docker
-Both apps maintain their own docker images, which requires both to be build and ran individually. 
+Both apps maintain their own docker images. 
 To build docker images 
 
 ```
   docker-compose build
 ```
 
->Commands must be run from their separate terminal windows
+> Commands must be run from their separate terminal windows
 
 
 ```
@@ -39,4 +39,4 @@ To build docker images
   docker run -p 5000:5000 coding-test_flask
 ```
 
-Check [localhost:8080](localhost:8080) and you should see the Tails Store Locator page
+Open [localhost:8080](http://localhost:8080) and you should see the Tails Store Locator page
