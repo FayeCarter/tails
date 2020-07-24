@@ -1,5 +1,7 @@
 # Tails coding test
 
+![](./tails.gif)
+
 ## Specification
 
 * Build an API that returns stores from the `stores.json` file, based on a given search string and unit test it. For example, return "Newhaven" when searching for "hav". Make sure the search allows to use both city name and postcode.
@@ -12,78 +14,29 @@
 
 ## System Requirements
 
-To run this project you will need to have Python 3, (pipenv)[https://pypi.org/project/pipenv/] and yarn installed
+You will need to have docker setup to run this code
 
 ## How to run this code
 
 Clone the repository and go into the directory where the package has been placed
 
-#### To run the server
-
-Open a new terminal
-
-Create a virtual environment
-```
-  yarn setup-api
-```
-
-Install dependencies
+### Docker
+Both apps maintain their own docker images, which requires both to be build and ran individually. 
+To build docker images 
 
 ```
-  pipenv install
+  docker-compose build
 ```
 
-Run the flask server
+>Commands must be run from their separate terminal windows
+
 
 ```
-  flask run
-```
-
-To close the server and exit the virtual environment
-
-```
-  Press CTRL+C 
-  exit
-```
-
-#### To run the frontend
-
-Open a new terminal
-
-Install dependencies
-```
-  yarn install-dependencies
-```
-
-Run the frontend server
-
-```
-  yarn start-frontend
-```
-
-## How to run tests
-
-#### To run the server tests
-
-Follow the initial steps to start the virtual environment
-
-To run the tests
-
-```
-  pipenv run pytest
+  docker run -p 8080:8080 coding-test_vue
 ```
 
 ```
-  Press CTRL+C 
-  exit
+  docker run -p 5000:5000 coding-test_flask
 ```
 
-#### To run the frontend
-
-Follow the initial steps to install dependencies
-
-To run the tests
-
-```
-  yarn test-frontend
-```
+Check [localhost:8080](localhost:8080) and you should see the Tails Store Locator page
