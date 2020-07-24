@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+
+  flask:
+    build: ./backend
+    container_name: backend
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - './backend:/backend'
+    environment:
+      FLASK_APP: app
+      FLASK_ENV: development
+    expose:
+      - 8080
+  
+  vue:
+    build: ./frontend
+    container_name: frontend
+    stdin_open: true
+    tty: true
+    ports: 
+      - "8080:8080"
+    volumes:
+      - "/app/node_modules" 
+      - ".:/app"
