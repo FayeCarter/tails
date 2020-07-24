@@ -21,14 +21,14 @@ You will need to have docker setup to run this code
 Clone the repository and go into the directory where the package has been placed
 
 ### Docker
-Both apps maintain their own docker images, which requires both to be build and ran individually. 
+Both apps maintain their own docker images.
 
-To build docker images 
+To build docker images
 ```
   docker-compose build
 ```
 
-To run docker images 
+To run docker images
 ```
   docker-compose up
 ```
