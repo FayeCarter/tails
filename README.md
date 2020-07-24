@@ -22,21 +22,15 @@ Clone the repository and go into the directory where the package has been placed
 
 ### Docker
 Both apps maintain their own docker images, which requires both to be build and ran individually. 
-To build docker images 
 
+To build docker images 
 ```
   docker-compose build
 ```
 
->Commands must be run from their separate terminal windows
-
-
+To run docker images 
 ```
-  docker run -p 8080:8080 coding-test_vue
+  docker-compose up
 ```
 
-```
-  docker run -p 5000:5000 coding-test_flask
-```
-
-Check [localhost:8080](localhost:8080) and you should see the Tails Store Locator page
+Visit port 8080 and you should see the Tails Store Locator page
