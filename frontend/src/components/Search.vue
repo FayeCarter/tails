@@ -122,14 +122,7 @@ export default {
   list-style-type: none;
   padding: 0;
   margin: 20px auto;
-}
-
-.suggested-store {
-  padding: 5px;
-}
-
-.suggested-store:hover {
-  background-color: rgb(230, 229, 229);
+  line-height: 20px;
 }
 
 .focus {
@@ -143,4 +136,5 @@ export default {
     top:0;
     z-index:-1;
 }
+
 </style>
