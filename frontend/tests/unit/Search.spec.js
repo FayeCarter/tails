@@ -196,4 +196,27 @@ describe('Search.vue', () => {
     });
   });
 
+  describe('lazy load', () => {
+    it('Only three results are rendered in search suggestions', async () => {
+      const wrapper = shallowMount(Search)
+  
+      const response = multipleStoresMock;
+      axios.get.mockResolvedValue(response);
+
+      const input = wrapper.find('input');
+      input.element.value = 'br';
+      input.trigger('input');
+
+      wrapper.setData({ open: 'true' })  
+      jest.runAllTimers();
+      await flushPromises()
+
+      expect(wrapper.text()).toContain("Orpington")
+      expect(wrapper.text()).toContain("Broadstairs")
+      expect(wrapper.text()).toContain("Bracknell")
+      expect(wrapper.text()).toContain("scroll to load more")
+      expect(wrapper.text()).not.toContain("Tunbridge Wells")
+    });
+  });
+
 });
