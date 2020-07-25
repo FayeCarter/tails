@@ -158,6 +158,14 @@ export default {
   background-color: rgb(230, 229, 229);
 }
 
+li:hover {
+  background-color: rgb(230, 229, 229);
+}
+
+.stores:hover > .focus{
+  background-color: rgb(255, 255, 255);
+}
+
 .window {
   position:absolute;
   width:100%;

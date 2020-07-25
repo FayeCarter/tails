@@ -28,7 +28,11 @@ To run the app
   docker-compose up --build
 ```
 
-Visit port 8080 and you should see the Tails Store Locator page
+Visit (port 8080)[http://0.0.0.0:8080/] and you should see the Tails Store Locator page
+
+#### Running the tests
+
+> Run the app (as above) then, in a separate terminal window: 
 
 To test the backend
 ```
