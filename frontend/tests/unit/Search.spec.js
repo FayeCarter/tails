@@ -217,6 +217,36 @@ describe('Search.vue', () => {
       expect(wrapper.text()).toContain("scroll to load more")
       expect(wrapper.text()).not.toContain("Tunbridge Wells")
     });
-  });
 
+    it('Only load all search suggestions after load', async () => {
+      const wrapper = shallowMount(Search)
+  
+      const response = multipleStoresMock;
+      axios.get.mockResolvedValue(response);
+
+      const input = wrapper.find('input');
+      input.element.value = 'br';
+      input.trigger('input');
+
+      wrapper.setData({ open: 'true' })  
+      jest.runAllTimers();
+      await flushPromises()
+
+      const searchSuggestions = wrapper.find('.stores');
+      searchSuggestions.trigger('scroll');
+      jest.runAllTimers();
+      await flushPromises()
+
+      searchSuggestions.trigger('scroll');
+      jest.runAllTimers();
+      await flushPromises()
+
+      expect(wrapper.text()).toContain("Orpington")
+      expect(wrapper.text()).toContain("Broadstairs")
+      expect(wrapper.text()).toContain("Bracknell")
+      expect(wrapper.text()).not.toContain("scroll to load more")
+      expect(wrapper.text()).toContain("Tunbridge Wells")
+      expect(wrapper.text()).toContain("Brentford")
+    });
+  });
 });

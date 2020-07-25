@@ -69,6 +69,7 @@ export default {
       this.stores = [];
     },
     addStores() {
+      this.stores = [];
       for(let i = 0; this.stores.length < this.allStores.length && i < this.count ; i ++) {
         this.stores.push(this.allStores[i]);
       }
