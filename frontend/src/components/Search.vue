@@ -14,15 +14,17 @@
       placeholder="Search for store by name or postcode"
     />
     <div v-if="open && stores.length >= 1 && store.length >= 2">
-      <ul class="stores">
+      <ul class="stores" @scroll="handleScroll">
         <div class="suggestions">Top store suggestions</div>
         <li
           v-for="(store, index) in stores"
           :class='{"focus": index == currentItem}'
-          v-bind:key="store"
-          @click="setStore(store)">
+          v-bind:key="index"
+          @click="setStore(store)"
+          >
             {{ store }}
         </li>
+        <div class="load" v-if="moreStores">scroll to load more</div>
       </ul>
     </div>
   </div>
@@ -36,25 +38,42 @@ export default {
   data() {
     return {
       stores: [],
+      allStores: [],
       store: "",
       open: false,
-      currentItem: 0
+      currentItem: 0,
+      count: 3,
+      moreStores: false
     };
   },
   methods: {
     getStores() {
+      this.resetSearch();
       const path = `http://localhost:5000/stores/search?query=${this.store}`;
       clearTimeout(this.debounce);
       this.debounce = setTimeout(() => {
         axios
           .get(path)
           .then(response => {
-            this.stores = response.data;
+            this.allStores = response.data;
+            this.addStores();
           })
           .catch(error => {
             console.log(error);
           });
       }, 1000);
+    },
+    resetSearch() {
+      this.count = 3;
+      this.moreStores = false;
+      this.stores = [];
+    },
+    addStores() {
+      for(let i = 0; this.stores.length < this.allStores.length && i < this.count ; i ++) {
+        this.stores.push(this.allStores[i]);
+      }
+      this.count ++;
+      this.stores.length < this.allStores.length ? this.moreStores = true : this.moreStores = false;
     },
     handleInput() {
       if (this.store.length >= 2) {
@@ -78,6 +97,13 @@ export default {
       if (!this.store.length) return;
       if (this.currentItem > 0) {
         this.currentItem --;
+      }
+    },
+    handleScroll({ target: { scrollTop, clientHeight, scrollHeight }}) {
+      if (scrollTop + clientHeight >= scrollHeight) {
+        setTimeout(() => {
+          this.addStores();
+        }, 500)
       }
     }
   },
@@ -123,6 +149,8 @@ export default {
   padding: 0;
   margin: 20px auto;
   line-height: 20px;
+  max-height: 116px;
+  overflow: auto;
 }
 
 .focus {
@@ -130,11 +158,18 @@ export default {
 }
 
 .window {
-    position:absolute;
-    width:100%;
-    height:100%;
-    top:0;
-    z-index:-1;
+  position:absolute;
+  width:100%;
+  height:100%;
+  top:0;
+  z-index:-1;
+}
+
+.load {
+  padding-bottom: 5px;
+  color: rgb(183, 183, 183);
+  font-style: italic;
+  background-color: rgb(242, 242, 242);
 }
 
 </style>
