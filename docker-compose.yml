@@ -19,10 +19,8 @@ services:
   vue:
     build: ./frontend
     container_name: frontend
-    stdin_open: true
-    tty: true
     ports: 
       - "8080:8080"
     volumes:
-      - "/app/node_modules" 
-      - ".:/app"
+      - ".:/frontend/"
+      - "/frontend/node_modules" 

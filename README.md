@@ -20,17 +20,22 @@ You will need to have docker setup to run this code
 
 Clone the repository and go into the directory where the package has been placed
 
-### Docker
+### Docker Instructions
 Both apps maintain their own docker images.
 
-To build docker images
+To run the app
 ```
-  docker-compose build
-```
-
-To run docker images
-```
-  docker-compose up
+  docker-compose up --build
 ```
 
 Visit port 8080 and you should see the Tails Store Locator page
+
+To test the backend
+```
+  docker exec -it backend pytest 
+```
+
+To test the frontend
+```
+  docker exec -it frontend npm run test
+```

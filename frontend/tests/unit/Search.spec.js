@@ -2,7 +2,7 @@ import { shallowMount, mount } from '@vue/test-utils'
 import axios from "axios";
 import flushPromises from 'flush-promises'
 import Search from '@/components/Search.vue'
-import { singleStoreMock, multipleStoresMock } from '../../fixtures/StoresMock';
+import { singleStoreMock, multipleStoresMock } from '../../fixtures/storesMock';
 
 jest.mock('axios');
 jest.useFakeTimers();
