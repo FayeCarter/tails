@@ -1,25 +1,26 @@
+-i https://pypi.org/simple/
 atomicwrites==1.4.0
-attrs==19.3.0
-backports.functools-lru-cache==1.6.1
+attrs==20.3.0
+backports.functools-lru-cache==1.6.4 ; python_version < '3.2'
 click==7.1.2
-configparser==4.0.2
-contextlib2==0.6.0.post1
-Flask==1.1.2
-Flask-Cors==3.0.8
-funcsigs==1.0.2
-importlib-metadata==1.7.0
+configparser==4.0.2 ; python_version < '3'
+contextlib2==0.6.0.post1 ; python_version < '3'
+flask-cors==3.0.8
+flask==1.1.2
+funcsigs==1.0.2 ; python_version < '3.0'
+importlib-metadata==2.1.1 ; python_version < '3.8'
 itsdangerous==1.1.0
-Jinja2==2.11.2
-MarkupSafe==1.1.1
-more-itertools==5.0.0
-packaging==20.4
-pathlib2==2.3.5
+jinja2==2.11.3
+markupsafe==1.1.1
+more-itertools==5.0.0 ; python_version <= '2.7'
+packaging==20.9
+pathlib2==2.3.5 ; python_version < '3'
 pluggy==0.13.1
-py==1.9.0
+py==1.10.0
 pyparsing==2.4.7
 pytest==4.6.11
-scandir==1.10.0
+scandir==1.10.0 ; python_version < '3.5'
 six==1.15.0
 wcwidth==0.2.5
-Werkzeug==1.0.1
+werkzeug==1.0.1
 zipp==1.2.0
